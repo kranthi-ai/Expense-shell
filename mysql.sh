@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USERID=$(id -u)
+USERID=$(id -u)  #check user has root access or not
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -35,10 +35,10 @@ CHECK_ROOT
 dnf install mysql-server -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing MySQL Server"
 
-systemctl enable mysqld
+systemctl enable mysqld  &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling MySQL Server"
 
-systemctl start mysqld
+systemctl start mysqld   &>>$LOG_FILE_NAME
 VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1
